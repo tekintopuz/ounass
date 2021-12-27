@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %}
+   Ounass-Adsets
+{% endblock head_title %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+{% endblock css %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered display" id="adsets_table">
+                    <thead>
+                        <tr>
+                            <th>Campaign_id</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Daily Budget</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Targeting</th>
+                            <th>Bid Amount</th>
+                            <th>Status</th>
+                            <th>Optimization Goal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for adset in adsets %}
+                            <tr>
+                                <td>{{adset.campaign_id }}</td>
+                                <td>{{adset.id }}</td>
+                                <td>{{adset.name}}</td>
+                                <td>{{adset.daily_budget}}</td>
+                                <td>{{adset.start_time}}</td>
+                                <td>{{adset.end_time}}</td>
+                                <td>{{adset.targeting}}</td>
+                                <td>{{adset.bid_amount}}</td>
+                                <td>{{adset.status}}</td>
+                                <td>{{adset.optimization_goal}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#adsets_table').DataTable();
+        });
+</script>
+{% endblock %}
+

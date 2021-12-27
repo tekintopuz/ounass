@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/var/ounass/backend
+      - ./backend/static:/var/ounass/backend/static
+      - ./backend/media:/var/ounass/backend/media
+    networks:
+      - nginx_network
+      - postgresql_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    command: [ "npm", "start" ]
+    volumes:
+      - ./frontend/:/var/ounass/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - nginx_network
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/ounass/log/nginx
+      - ./backend/static:/var/ounass/backend/static
+      - ./backend/media:/var/ounass/backend/media
+      - ./frontend:/var/ounass/frontend
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - nginx_network
+
+  db:
+    image: postgres:13.0-alpine
+    container_name: postgresql
+    env_file:
+      - .env
+    networks:
+      - postgresql_network
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+
+networks:
+  nginx_network:
+    driver: bridge
+  postgresql_network:
+    driver: bridge

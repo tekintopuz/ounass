@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %}
+   Ounass-AdPreviews
+{% endblock head_title %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+{% endblock css %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered display" id="previews_table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>BODY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for preview in previews %}
+                            <tr>
+                                <td>{{preview.0 }}</td>
+                                <td>{{preview.1 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#previews_table').DataTable();
+        });
+</script>
+{% endblock %}
+
