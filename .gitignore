@@ -127,9 +127,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# local volumes
-postgres/
-media_volume/
-static_volume/
-
 .idea
