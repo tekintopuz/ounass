@@ -7,6 +7,9 @@ Static and media files are configured to be served by Nginx, and stored locally 
 The default Nginx configuration file can be found at `nginx/nginx.conf`.  
 It's set to run the site for local development at `http://localhost` or `http://127.0.0.1` with default http port 80
 
+# Sample Env
+Please use sample_env by renaming it as `.env` to be able to access facebook api and postgresql  and also for django settings.py
+
 ## Postgres configuration
 Default Postgres setting can be found in `.env`. The Postgres Docker image will automatically create a database with these settings when the container is started.
 `postgresql` everywhere for default values and used in  `backend\ounass\settings.py` and matched the container name in the `docker-compose.yml` file for the Postgres container.
